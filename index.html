@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  Sundae — Standalone Thank You page
+  Brand-matched to the Sundae lander (dark navy hero, diamond dot pattern,
+  Outfit + Source Sans 3, blue accent #228DF9).
+-->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thank You — Sundae</title>
+  <meta name="description" content="Thank you from Sundae Websites." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Source+Sans+3:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Source Sans 3", system-ui, -apple-system, sans-serif;
+      background: #1B1D2B;
+      color: #FFFFFF;
+      font-size: 18px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    h1 {
+      font-family: "Outfit", system-ui, sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.05;
+      margin: 0;
+    }
+    p { margin: 0; }
+
+    /* Top wordmark bar */
+    .topbar {
+      position: relative;
+      z-index: 10;
+      padding: 28px 32px;
+      display: flex;
+      justify-content: center;
+    }
+    .wordmark img { height: 28px; width: auto; }
+
+    /* Stage with diamond dot pattern (from lander, softened) */
+    .stage {
+      position: relative;
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 64px 32px 80px;
+      overflow: hidden;
+    }
+    .dot-pattern {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path d='M7.6,12.46 L3.54,8.4 C3.25,8.11 3.25,7.64 3.54,7.36 L7.6,3.3 C7.89,3.01 8.36,3.01 8.65,3.3 L12.7,7.36 C12.99,7.64 12.99,8.11 12.7,8.4 L8.65,12.46 C8.36,12.75 7.89,12.75 7.6,12.46Z' fill='%23228DF9' fill-opacity='0.12'/></svg>");
+      background-size: 16px 16px;
+      background-repeat: repeat;
+      mask-image: radial-gradient(ellipse 65% 70% at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.7) 90%);
+      -webkit-mask-image: radial-gradient(ellipse 65% 70% at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.7) 90%);
+    }
+
+    .content {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 720px;
+      text-align: center;
+    }
+
+    /* Confirmation badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: rgba(34, 141, 249, 0.12);
+      border: 1px solid rgba(34, 141, 249, 0.35);
+      color: #6FB5FB;
+      font-family: "Outfit", sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .badge .diamond {
+      width: 9px; height: 9px;
+      background: #228DF9;
+      transform: rotate(45deg);
+      border-radius: 2px;
+      box-shadow: 0 0 12px rgba(34, 141, 249, 0.6);
+    }
+
+    h1 {
+      font-size: clamp(30px, 5.2vw, 44px);
+      margin: 28px auto 0;
+      color: #FFFFFF;
+      max-width: 18ch;
+    }
+    .accent { color: #6FB5FB; }
+    .lede {
+      font-size: clamp(16px, 2.1vw, 19px);
+      color: rgba(255,255,255,0.78);
+      max-width: 44ch;
+      margin: 22px auto 0;
+    }
+
+    /* Bottom home link — thin plain text, but 44px tap target on touch */
+    .home-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      margin: 28px auto 0;
+      font-family: "Source Sans 3", sans-serif;
+      font-weight: 200;
+      font-size: 15px;
+      letter-spacing: 0.01em;
+      color: rgba(255, 255, 255, 0.55);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 0 2px 1px;
+      transition: color 150ms ease-out, border-color 150ms ease-out;
+    }
+    .home-link:hover {
+      color: #6FB5FB;
+      border-bottom-color: rgba(111, 181, 251, 0.5);
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .stage { padding: 40px 20px 56px; }
+      .topbar { padding: 22px 20px; }
+      .badge { font-size: 12px; padding: 9px 16px; letter-spacing: 0.10em; }
+      h1 { margin-top: 22px; }
+      .lede { margin-top: 18px; }
+      .home-link { margin-top: 24px; }
+    }
+    @media (max-width: 380px) {
+      .stage { padding: 32px 18px 48px; }
+      .badge { font-size: 11.5px; padding: 8px 14px; }
+      .badge .diamond { width: 8px; height: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <span class="wordmark" aria-label="Sundae">
+      <img src="assets/sundae-wordmark.png" alt="Sundae" />
+    </span>
+  </div>
+
+  <main class="stage">
+    <div class="dot-pattern" aria-hidden="true"></div>
+
+    <div class="content">
+      <span class="badge"><span class="diamond"></span><span>Appointment Confirmed</span></span>
+
+      <h1>You're all set.<br /><span class="accent">Let's grow your business.</span></h1>
+
+      <p class="lede">We look forward to talking with you about your business. Keep an eye out for the appointment confirmation email in your inbox.</p>
+
+      <a class="home-link" href="https://sundaewebsites.com">Go to Sundae Websites home page</a>
+    </div>
+  </main>
+
+</body>
+</html>
